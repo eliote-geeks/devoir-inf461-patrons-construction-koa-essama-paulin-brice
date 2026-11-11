@@ -7,6 +7,8 @@
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{pdflscape}
+\usepackage{listings}
+\lstset{language=Java,basicstyle=\ttfamily\scriptsize,breaklines=true,frame=single,columns=fullflexible}
 \hypersetup{colorlinks=true,urlcolor=blue}
 \title{Devoir n°1 : Patrons de construction (INF461)}
 \author{KOA ESSAMA PAULIN BRICE\\Matricule : 25I2255}
@@ -51,19 +53,44 @@ On ajoute \texttt{TrainInterurbain} et \texttt{FabriqueTrainInterurbain}. Les cl
 \caption{Factory -- moyens de transport (4 transports)}
 \end{figure}
 
-\section{Implémentation}
-Le code Java se trouve dans le dossier \texttt{src} du projet. Il est organisé en quatre packages :
+\section{Implémentation complète}
+Les quatre codes sources sont inclus ci-dessous. Ils peuvent être compilés directement avec Java.
+\subsection{Factory Method : documents administratifs (3 documents)}
+\lstinputlisting{src/factorymethod/troisproduits/Client.java}
+
+\subsection{Factory Method : documents administratifs (4 documents)}
+\lstinputlisting{src/factorymethod/quatreproduits/Client.java}
+
+\subsection{Factory : moyens de transport (3 transports)}
+\lstinputlisting{src/factory/troisproduits/Client.java}
+
+\subsection{Factory : moyens de transport (4 transports)}
+\lstinputlisting{src/factory/quatreproduits/Client.java}
+
+\section{Organisation du code et dépôt GitHub}
+Le code est organisé en quatre packages :
 \begin{itemize}[noitemsep]
   \item \texttt{factorymethod.troisproduits} : exemple du cours ;
   \item \texttt{factorymethod.quatreproduits} : variante à quatre produits ;
   \item \texttt{factory.troisproduits} : exemple du cours ;
   \item \texttt{factory.quatreproduits} : variante à quatre produits.
 \end{itemize}
-Les diagrammes et leurs fichiers sources sont dans \texttt{diagrammes}. Le dépôt public est disponible à l'adresse : \url{https://github.com/eliote-geeks/devoir-inf461-patrons-construction-koa-essama-paulin-brice}.
+Le dépôt public est disponible à l'adresse : \url{https://github.com/eliote-geeks/devoir-inf461-patrons-construction-koa-essama-paulin-brice}.
 
 \section{Analyse des modèles génériques}
-\textbf{Factory Method.} Une seule fabrique choisit le produit à l'aide d'un paramètre. Cette solution est simple lorsque le type est connu seulement à l'exécution. Son ajout de \texttt{ProduitD} impose toutefois de modifier la classe \texttt{FabriqueProduit}.
+\textbf{Factory Method.} Une seule fabrique choisit le document à l'aide d'un paramètre. Cette solution est simple lorsque le type est connu seulement à l'exécution. L'ajout de \texttt{LettreRecommandation} impose toutefois de modifier \texttt{FabriqueDocument}.
 
-\textbf{Factory.} Une fabrique abstraite déclare \texttt{createProduit()} et chaque sous-classe crée un type concret. L'ajout de D consiste à créer \texttt{ProduitD} et \texttt{ProduitFactoryD}, sans modifier les fabriques existantes. Cette solution respecte mieux le principe ouvert/fermé, mais nécessite davantage de classes.
+\textbf{Factory.} Une fabrique abstraite déclare \texttt{creerTransport()} et chaque sous-classe crée un moyen de transport concret. L'ajout du train consiste à créer \texttt{TrainInterurbain} et \texttt{FabriqueTrainInterurbain}, sans modifier les fabriques existantes. Cette solution respecte mieux le principe ouvert/fermé, mais nécessite davantage de classes.
+
+\section{Modèles génériques}
+Les deux modèles génériques étudiés servent de base aux exemples personnels précédents.
+\begin{figure}[H]\centering
+\includegraphics[width=.65\textwidth]{diagrammes/modele_generique_factory_method.png}
+\caption{Modèle générique Factory Method}
+\end{figure}
+\begin{figure}[H]\centering
+\includegraphics[width=.65\textwidth]{diagrammes/modele_generique_factory.png}
+\caption{Modèle générique Factory}
+\end{figure}
 
 \end{document}
