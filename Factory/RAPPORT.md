@@ -58,3 +58,7 @@ L'exemple initial contient les produits et fabriques A, B et C. La version modif
 
 Les quatre programmes affichent les produits créés. Les commandes sont indiquées dans le fichier `README.md` à la racine du projet.
 
+## 4. Dépôt GitHub
+
+Le projet est disponible publiquement sur : https://github.com/eliote-geeks/devoir-inf461-patrons-construction-koa-essama-paulin-brice
+
