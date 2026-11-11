@@ -1,0 +1,69 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\usepackage[margin=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{pdflscape}
+\hypersetup{colorlinks=true,urlcolor=blue}
+\title{Devoir n°1 : Patrons de construction (INF461)}
+\author{KOA ESSAMA PAULIN BRICE\\Matricule : 25I2255}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Introduction}
+Ce rapport présente les deux formes du patron Factory étudiées dans le support : \textit{Factory Method} et \textit{Factory}. L'exemple du cours gère trois produits (A, B et C). La variante demandée ajoute un quatrième produit D. Pour chaque patron, le rapport contient le diagramme de classes de l'exemple du cours puis celui de la version modifiée.
+
+\section{Exemple vu en cours : trois produits}
+Dans les deux cas, le client ne connaît le type concret de produit qu'à l'exécution.
+
+\subsection{Factory Method}
+Une seule classe \texttt{FabriqueProduit} reçoit une catégorie et crée \texttt{ProduitA}, \texttt{ProduitB} ou \texttt{ProduitC}. Le client dépend de l'interface \texttt{Produit}.
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth,height=.55\textheight,keepaspectratio]{diagrammes/factorymethod_cours.png}
+\caption{Factory Method -- exemple du cours (3 produits)}
+\end{figure}
+
+\subsection{Factory}
+\texttt{ProduitFactory} définit la méthode de création. Chaque fabrique concrète crée un seul produit : \texttt{ProduitFactoryA} crée \texttt{ProduitA}, etc.
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth,height=.55\textheight,keepaspectratio]{diagrammes/factory_cours.png}
+\caption{Factory -- exemple du cours (3 produits)}
+\end{figure}
+
+\section{Exemple modifié : quatre produits}
+La variante gère maintenant quatre types de produits : A, B, C et D.
+
+\subsection{Factory Method modifié}
+On ajoute \texttt{ProduitD} et le cas \texttt{D} dans \texttt{FabriqueProduit}. La fabrique centrale doit donc être modifiée pour connaître le nouveau produit.
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth,height=.55\textheight,keepaspectratio]{diagrammes/factorymethod_modifie.png}
+\caption{Factory Method -- exemple modifié (4 produits)}
+\end{figure}
+
+\subsection{Factory modifié}
+On ajoute \texttt{ProduitD} et \texttt{ProduitFactoryD}. Les classes déjà présentes ne changent pas ; le client peut utiliser la nouvelle fabrique.
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth,height=.55\textheight,keepaspectratio]{diagrammes/factory_modifie.png}
+\caption{Factory -- exemple modifié (4 produits)}
+\end{figure}
+
+\section{Implémentation}
+Le code Java se trouve dans le dossier \texttt{src} du projet. Il est organisé en quatre packages :
+\begin{itemize}[noitemsep]
+  \item \texttt{factorymethod.troisproduits} : exemple du cours ;
+  \item \texttt{factorymethod.quatreproduits} : variante à quatre produits ;
+  \item \texttt{factory.troisproduits} : exemple du cours ;
+  \item \texttt{factory.quatreproduits} : variante à quatre produits.
+\end{itemize}
+Les diagrammes et leurs fichiers sources sont dans \texttt{diagrammes}. Le dépôt Git local est prêt à être publié sur GitHub.
+
+\section{Analyse des modèles génériques}
+\textbf{Factory Method.} Une seule fabrique choisit le produit à l'aide d'un paramètre. Cette solution est simple lorsque le type est connu seulement à l'exécution. Son ajout de \texttt{ProduitD} impose toutefois de modifier la classe \texttt{FabriqueProduit}.
+
+\textbf{Factory.} Une fabrique abstraite déclare \texttt{createProduit()} et chaque sous-classe crée un type concret. L'ajout de D consiste à créer \texttt{ProduitD} et \texttt{ProduitFactoryD}, sans modifier les fabriques existantes. Cette solution respecte mieux le principe ouvert/fermé, mais nécessite davantage de classes.
+
+\end{document}

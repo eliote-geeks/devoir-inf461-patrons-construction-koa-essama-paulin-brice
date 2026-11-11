@@ -1,0 +1,17 @@
+digraph FactoryMethodCours {
+  graph [rankdir=TB, pad="0.25", nodesep="0.45", ranksep="0.55", bgcolor="white"];
+  node [shape=plain, fontname="Arial"];
+  Client [label=<<table border="1" cellborder="0" cellspacing="0"><tr><td><b>Client</b></td></tr><tr><td align="left">+ main()</td></tr></table>>];
+  Fabrique [label=<<table border="1" cellborder="0" cellspacing="0"><tr><td><b>FabriqueProduit</b></td></tr><tr><td align="left">+ createProduit(categorie: String): Produit</td></tr></table>>];
+  Produit [label=<<table border="1" cellborder="0" cellspacing="0"><tr><td>&lt;&lt;interface&gt;&gt;<br/><b>Produit</b></td></tr><tr><td align="left">+ methodeProduit(): String</td></tr></table>>];
+  A [label=<<table border="1" cellborder="0" cellspacing="0"><tr><td><b>ProduitA</b></td></tr><tr><td>+ methodeProduit()</td></tr></table>>];
+  B [label=<<table border="1" cellborder="0" cellspacing="0"><tr><td><b>ProduitB</b></td></tr><tr><td>+ methodeProduit()</td></tr></table>>];
+  C [label=<<table border="1" cellborder="0" cellspacing="0"><tr><td><b>ProduitC</b></td></tr><tr><td>+ methodeProduit()</td></tr></table>>];
+  {rank=same; Client; Fabrique} {rank=same; A; B; C}
+  Client -> Fabrique [style=dashed, label="utilise"];
+  Client -> Produit [style=dashed, label="utilise"];
+  Fabrique -> A [style=dashed, label="&lt;&lt;instantiate&gt;&gt;"];
+  Fabrique -> B [style=dashed, label="&lt;&lt;instantiate&gt;&gt;"];
+  Fabrique -> C [style=dashed, label="&lt;&lt;instantiate&gt;&gt;"];
+  A -> Produit [arrowhead=empty]; B -> Produit [arrowhead=empty]; C -> Produit [arrowhead=empty];
+}
