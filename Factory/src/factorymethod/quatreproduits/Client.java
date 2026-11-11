@@ -1,33 +1,33 @@
 package factorymethod.quatreproduits;
 
-/** Extension de l'exemple Factory Method avec quatre produits. */
+/** Variante : un quatrième document administratif est ajouté. */
 public class Client {
     public static void main(String[] args) {
-        FabriqueProduit fabrique = new FabriqueProduit();
-        for (String categorie : new String[] {"A", "B", "C", "D"}) {
-            Produit produit = fabrique.creerProduit(categorie);
-            System.out.println(produit.methodeProduit());
+        FabriqueDocument fabrique = new FabriqueDocument();
+        for (String type : new String[] {"attestation", "stage", "releve", "recommandation"}) {
+            Document document = fabrique.creerDocument(type);
+            System.out.println(document.generer());
         }
     }
 }
 
-interface Produit {
-    String methodeProduit();
+interface Document {
+    String generer();
 }
 
-class ProduitA implements Produit { public String methodeProduit() { return "Produit A créé"; } }
-class ProduitB implements Produit { public String methodeProduit() { return "Produit B créé"; } }
-class ProduitC implements Produit { public String methodeProduit() { return "Produit C créé"; } }
-class ProduitD implements Produit { public String methodeProduit() { return "Produit D créé"; } }
+class AttestationScolarite implements Document { public String generer() { return "Attestation de scolarité générée"; } }
+class CertificatStage implements Document { public String generer() { return "Certificat de stage généré"; } }
+class ReleveNotes implements Document { public String generer() { return "Relevé de notes généré"; } }
+class LettreRecommandation implements Document { public String generer() { return "Lettre de recommandation générée"; } }
 
-class FabriqueProduit {
-    public Produit creerProduit(String categorie) {
-        return switch (categorie.toUpperCase()) {
-            case "A" -> new ProduitA();
-            case "B" -> new ProduitB();
-            case "C" -> new ProduitC();
-            case "D" -> new ProduitD();
-            default -> throw new IllegalArgumentException("Catégorie inconnue : " + categorie);
+class FabriqueDocument {
+    public Document creerDocument(String type) {
+        return switch (type.toLowerCase()) {
+            case "attestation" -> new AttestationScolarite();
+            case "stage" -> new CertificatStage();
+            case "releve" -> new ReleveNotes();
+            case "recommandation" -> new LettreRecommandation();
+            default -> throw new IllegalArgumentException("Type inconnu : " + type);
         };
     }
 }

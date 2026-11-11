@@ -15,40 +15,40 @@
 \maketitle
 
 \section*{Introduction}
-Ce rapport présente les deux formes du patron Factory étudiées dans le support : \textit{Factory Method} et \textit{Factory}. L'exemple du cours gère trois produits (A, B et C). La variante demandée ajoute un quatrième produit D. Pour chaque patron, le rapport contient le diagramme de classes de l'exemple du cours puis celui de la version modifiée.
+Ce rapport présente deux exemples personnels inspirés des formes \textit{Factory Method} et \textit{Factory}. Le premier gère des documents administratifs ; le second gère des moyens de transport. Chaque exemple commence avec trois classes concrètes, puis est modifié par l'ajout d'une quatrième classe.
 
 \section{Exemple vu en cours : trois produits}
-Dans les deux cas, le client ne connaît le type concret de produit qu'à l'exécution.
+Dans les deux cas, le client ne connaît le type concret à utiliser qu'à l'exécution.
 
 \subsection{Factory Method}
-Une seule classe \texttt{FabriqueProduit} reçoit une catégorie et crée \texttt{ProduitA}, \texttt{ProduitB} ou \texttt{ProduitC}. Le client dépend de l'interface \texttt{Produit}.
+Une seule classe \texttt{FabriqueDocument} reçoit le type souhaité et crée une \texttt{AttestationScolarite}, un \texttt{CertificatStage} ou un \texttt{ReleveNotes}. Le client dépend de l'interface \texttt{Document}.
 \begin{figure}[H]\centering
-\includegraphics[width=\textwidth,height=.55\textheight,keepaspectratio]{diagrammes/factorymethod_cours.png}
-\caption{Factory Method -- exemple du cours (3 produits)}
+\includegraphics[width=\textwidth,height=.55\textheight,keepaspectratio]{diagrammes/documents_3.png}
+\caption{Factory Method -- documents administratifs (3 documents)}
 \end{figure}
 
 \subsection{Factory}
-\texttt{ProduitFactory} définit la méthode de création. Chaque fabrique concrète crée un seul produit : \texttt{ProduitFactoryA} crée \texttt{ProduitA}, etc.
+\texttt{FabriqueTransport} définit la méthode de création. Les fabriques concrètes créent une \texttt{MotoTaxi}, un \texttt{TaxiVille} ou un \texttt{BusUrbain}.
 \begin{figure}[H]\centering
-\includegraphics[width=\textwidth,height=.55\textheight,keepaspectratio]{diagrammes/factory_cours.png}
-\caption{Factory -- exemple du cours (3 produits)}
+\includegraphics[width=\textwidth,height=.55\textheight,keepaspectratio]{diagrammes/transports_3.png}
+\caption{Factory -- moyens de transport (3 transports)}
 \end{figure}
 
 \section{Exemple modifié : quatre produits}
-La variante gère maintenant quatre types de produits : A, B, C et D.
+La variante ajoute un quatrième élément à chacun des exemples.
 
 \subsection{Factory Method modifié}
-On ajoute \texttt{ProduitD} et le cas \texttt{D} dans \texttt{FabriqueProduit}. La fabrique centrale doit donc être modifiée pour connaître le nouveau produit.
+On ajoute \texttt{LettreRecommandation} et le cas \texttt{recommandation} dans \texttt{FabriqueDocument}. La fabrique centrale doit donc être modifiée.
 \begin{figure}[H]\centering
-\includegraphics[width=\textwidth,height=.55\textheight,keepaspectratio]{diagrammes/factorymethod_modifie.png}
-\caption{Factory Method -- exemple modifié (4 produits)}
+\includegraphics[width=\textwidth,height=.55\textheight,keepaspectratio]{diagrammes/documents_4.png}
+\caption{Factory Method -- documents administratifs (4 documents)}
 \end{figure}
 
 \subsection{Factory modifié}
-On ajoute \texttt{ProduitD} et \texttt{ProduitFactoryD}. Les classes déjà présentes ne changent pas ; le client peut utiliser la nouvelle fabrique.
+On ajoute \texttt{TrainInterurbain} et \texttt{FabriqueTrainInterurbain}. Les classes déjà présentes ne changent pas ; le client peut utiliser la nouvelle fabrique.
 \begin{figure}[H]\centering
-\includegraphics[width=\textwidth,height=.55\textheight,keepaspectratio]{diagrammes/factory_modifie.png}
-\caption{Factory -- exemple modifié (4 produits)}
+\includegraphics[width=\textwidth,height=.55\textheight,keepaspectratio]{diagrammes/transports_4.png}
+\caption{Factory -- moyens de transport (4 transports)}
 \end{figure}
 
 \section{Implémentation}

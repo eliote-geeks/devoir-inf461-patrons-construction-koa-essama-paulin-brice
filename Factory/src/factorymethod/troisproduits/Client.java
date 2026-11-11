@@ -1,39 +1,39 @@
 package factorymethod.troisproduits;
 
-/** Exemple du support : Factory Method avec trois produits. */
+/** Exemple personnel : création de documents administratifs. */
 public class Client {
     public static void main(String[] args) {
-        FabriqueProduit fabrique = new FabriqueProduit();
-        for (String categorie : new String[] {"A", "B", "C"}) {
-            Produit produit = fabrique.creerProduit(categorie);
-            System.out.println(produit.methodeProduit());
+        FabriqueDocument fabrique = new FabriqueDocument();
+        for (String type : new String[] {"attestation", "stage", "releve"}) {
+            Document document = fabrique.creerDocument(type);
+            System.out.println(document.generer());
         }
     }
 }
 
-interface Produit {
-    String methodeProduit();
+interface Document {
+    String generer();
 }
 
-class ProduitA implements Produit {
-    public String methodeProduit() { return "Produit A créé"; }
+class AttestationScolarite implements Document {
+    public String generer() { return "Attestation de scolarité générée"; }
 }
 
-class ProduitB implements Produit {
-    public String methodeProduit() { return "Produit B créé"; }
+class CertificatStage implements Document {
+    public String generer() { return "Certificat de stage généré"; }
 }
 
-class ProduitC implements Produit {
-    public String methodeProduit() { return "Produit C créé"; }
+class ReleveNotes implements Document {
+    public String generer() { return "Relevé de notes généré"; }
 }
 
-class FabriqueProduit {
-    public Produit creerProduit(String categorie) {
-        return switch (categorie.toUpperCase()) {
-            case "A" -> new ProduitA();
-            case "B" -> new ProduitB();
-            case "C" -> new ProduitC();
-            default -> throw new IllegalArgumentException("Catégorie inconnue : " + categorie);
+class FabriqueDocument {
+    public Document creerDocument(String type) {
+        return switch (type.toLowerCase()) {
+            case "attestation" -> new AttestationScolarite();
+            case "stage" -> new CertificatStage();
+            case "releve" -> new ReleveNotes();
+            default -> throw new IllegalArgumentException("Type inconnu : " + type);
         };
     }
 }

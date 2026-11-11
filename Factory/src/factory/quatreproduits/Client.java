@@ -1,36 +1,36 @@
 package factory.quatreproduits;
 
-/** Extension de Factory : une quatrième fabrique crée ProduitD. */
+/** Variante : un train interurbain complète les trois transports initiaux. */
 public class Client {
     public static void main(String[] args) {
-        ProduitFactory[] fabriques = {
-            new ProduitFactoryA(), new ProduitFactoryB(),
-            new ProduitFactoryC(), new ProduitFactoryD()
+        FabriqueTransport[] fabriques = {
+            new FabriqueMotoTaxi(), new FabriqueTaxiVille(),
+            new FabriqueBusUrbain(), new FabriqueTrainInterurbain()
         };
-        for (ProduitFactory fabrique : fabriques) {
-            System.out.println(fabrique.getProduit().methodeProduit());
+        for (FabriqueTransport fabrique : fabriques) {
+            System.out.println(fabrique.obtenirTransport().demarrer());
         }
     }
 }
 
-interface Produit {
-    String methodeProduit();
+interface MoyenTransport {
+    String demarrer();
 }
 
-class ProduitA implements Produit { public String methodeProduit() { return "Produit A créé"; } }
-class ProduitB implements Produit { public String methodeProduit() { return "Produit B créé"; } }
-class ProduitC implements Produit { public String methodeProduit() { return "Produit C créé"; } }
-class ProduitD implements Produit { public String methodeProduit() { return "Produit D créé"; } }
+class MotoTaxi implements MoyenTransport { public String demarrer() { return "Moto-taxi prêt pour la course"; } }
+class TaxiVille implements MoyenTransport { public String demarrer() { return "Taxi de ville prêt pour la course"; } }
+class BusUrbain implements MoyenTransport { public String demarrer() { return "Bus urbain prêt pour la course"; } }
+class TrainInterurbain implements MoyenTransport { public String demarrer() { return "Train interurbain prêt pour le départ"; } }
 
-abstract class ProduitFactory {
-    public Produit getProduit() {
-        return creerProduit();
+abstract class FabriqueTransport {
+    public MoyenTransport obtenirTransport() {
+        return creerTransport();
     }
-    protected abstract Produit creerProduit();
+    protected abstract MoyenTransport creerTransport();
 }
 
-class ProduitFactoryA extends ProduitFactory { protected Produit creerProduit() { return new ProduitA(); } }
-class ProduitFactoryB extends ProduitFactory { protected Produit creerProduit() { return new ProduitB(); } }
-class ProduitFactoryC extends ProduitFactory { protected Produit creerProduit() { return new ProduitC(); } }
-class ProduitFactoryD extends ProduitFactory { protected Produit creerProduit() { return new ProduitD(); } }
+class FabriqueMotoTaxi extends FabriqueTransport { protected MoyenTransport creerTransport() { return new MotoTaxi(); } }
+class FabriqueTaxiVille extends FabriqueTransport { protected MoyenTransport creerTransport() { return new TaxiVille(); } }
+class FabriqueBusUrbain extends FabriqueTransport { protected MoyenTransport creerTransport() { return new BusUrbain(); } }
+class FabriqueTrainInterurbain extends FabriqueTransport { protected MoyenTransport creerTransport() { return new TrainInterurbain(); } }
 

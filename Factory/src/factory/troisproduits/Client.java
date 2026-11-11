@@ -1,41 +1,41 @@
 package factory.troisproduits;
 
-/** Exemple Factory avec une fabrique abstraite et trois fabriques concrètes. */
+/** Exemple personnel : sélection de moyens de transport urbain. */
 public class Client {
     public static void main(String[] args) {
-        ProduitFactory[] fabriques = {
-            new ProduitFactoryA(), new ProduitFactoryB(), new ProduitFactoryC()
+        FabriqueTransport[] fabriques = {
+            new FabriqueMotoTaxi(), new FabriqueTaxiVille(), new FabriqueBusUrbain()
         };
-        for (ProduitFactory fabrique : fabriques) {
-            System.out.println(fabrique.getProduit().methodeProduit());
+        for (FabriqueTransport fabrique : fabriques) {
+            System.out.println(fabrique.obtenirTransport().demarrer());
         }
     }
 }
 
-interface Produit {
-    String methodeProduit();
+interface MoyenTransport {
+    String demarrer();
 }
 
-class ProduitA implements Produit { public String methodeProduit() { return "Produit A créé"; } }
-class ProduitB implements Produit { public String methodeProduit() { return "Produit B créé"; } }
-class ProduitC implements Produit { public String methodeProduit() { return "Produit C créé"; } }
+class MotoTaxi implements MoyenTransport { public String demarrer() { return "Moto-taxi prêt pour la course"; } }
+class TaxiVille implements MoyenTransport { public String demarrer() { return "Taxi de ville prêt pour la course"; } }
+class BusUrbain implements MoyenTransport { public String demarrer() { return "Bus urbain prêt pour la course"; } }
 
-abstract class ProduitFactory {
-    public Produit getProduit() {
-        return creerProduit();
+abstract class FabriqueTransport {
+    public MoyenTransport obtenirTransport() {
+        return creerTransport();
     }
-    protected abstract Produit creerProduit();
+    protected abstract MoyenTransport creerTransport();
 }
 
-class ProduitFactoryA extends ProduitFactory {
-    protected Produit creerProduit() { return new ProduitA(); }
+class FabriqueMotoTaxi extends FabriqueTransport {
+    protected MoyenTransport creerTransport() { return new MotoTaxi(); }
 }
 
-class ProduitFactoryB extends ProduitFactory {
-    protected Produit creerProduit() { return new ProduitB(); }
+class FabriqueTaxiVille extends FabriqueTransport {
+    protected MoyenTransport creerTransport() { return new TaxiVille(); }
 }
 
-class ProduitFactoryC extends ProduitFactory {
-    protected Produit creerProduit() { return new ProduitC(); }
+class FabriqueBusUrbain extends FabriqueTransport {
+    protected MoyenTransport creerTransport() { return new BusUrbain(); }
 }
 
